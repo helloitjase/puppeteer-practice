@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-
+const fs = require('fs');
 (async() => {
   try{
     const browser = await puppeteer.launch();
@@ -21,11 +21,24 @@ const puppeteer = require('puppeteer');
       })
       return data;
     })
+
+    fs.writeFile(
+      './teams.json',
+      JSON.stringify(result),
+      (err) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log('Data written');
+      }
+    )
+
     console.log(result);
     browser.close();
     return result
 
   } catch(error) {
     console.log(error);
+    
   }
 })()
