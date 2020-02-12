@@ -6,6 +6,7 @@ const scrapeY = async() => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto('https://news.ycombinator.com');
+    await page.waitForSelector('tr.athing');
     const results = await page.evaluate(() => {
       const getInfo = (row, className) => {
         return row.querySelector(className).innerText;
